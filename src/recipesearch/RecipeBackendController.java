@@ -1,11 +1,11 @@
 package recipesearch;
-import java.sql.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import se.chalmers.ait.dat215.lab2.Recipe;
+import se.chalmers.ait.dat215.lab2.SearchFilter;
 
-public class RecipeBackendController {
+public class RecipeBackendController extends RecipeSearchController {
     private String cuisine;
     private String mainIngredient;
     private String difficulty;
@@ -13,8 +13,8 @@ public class RecipeBackendController {
     private int maxTime;
 
     public List<Recipe> getRecipes(){
-
-        return null;
+        List<Recipe> recipes = db.search(new SearchFilter(difficulty, maxTime, cuisine, maxPrice, mainIngredient));
+        return recipes;
     }
 
     public void voidsetCuisine(String cuisine){
@@ -27,7 +27,7 @@ public class RecipeBackendController {
     }
 
     public void setMainIngredient(String mainIngredient){
-    String[] IngredientsList = {"Kött","Fisk","Kyckling","Vegetarisk"};
+        String[] IngredientsList = {"Kött","Fisk","Kyckling","Vegetarisk"};
         if (Arrays.asList(IngredientsList).contains(mainIngredient)){
             this.mainIngredient = mainIngredient;
         } else{
